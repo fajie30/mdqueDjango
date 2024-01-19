@@ -1,3 +1,4 @@
+from django.utils import timezone
 from django.db import models
 from django.contrib.auth.hashers import make_password
 
@@ -11,6 +12,7 @@ class UserRole(models.Model):
 class User(models.Model):
     pincode = models.CharField(max_length=200)
     mobile = models.CharField(max_length=20)
+    date_registered = models.DateTimeField(default=timezone.now)
     user_role = models.ForeignKey(UserRole, on_delete=models.CASCADE)
     status = models.CharField(max_length=200)
 

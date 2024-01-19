@@ -27,8 +27,8 @@
 #         else:
 #             return HttpResponse('Bad Request: Missing role name', status=400)
 from rest_framework import viewsets
-from .models import UserRole
-from .serializers import UserRoleSerializer
+from .models import UserRole, User
+from .serializers import UserRoleSerializer, UserSerializer
 
 class UserRoleViewSet(viewsets.ModelViewSet):
     queryset = UserRole.objects.all()
@@ -37,3 +37,7 @@ class UserRoleViewSet(viewsets.ModelViewSet):
     def save(self, *args, **kwargs):
         self.role = self.role.title()
         super(UserRole, self).save(*args, **kwargs)
+
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
